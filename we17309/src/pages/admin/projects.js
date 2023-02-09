@@ -12,22 +12,27 @@ const ProjectsPage = () => {
     const [data, setData] = useState([]); // 3
 
     useEffect(() => {
-        fetch("https://reqres.in/api/users")
+        fetch("http://localhost:3000/projects")
             .then((response) => response.json())
-            .then(({ data }) => setData(data));
+            .then(data => setData(data));
         // lam viec voi localStorage
         // const projects = JSON.parse(localStorage.getItem("projects")) || [];
         // setData(projects);
-    }, []);
+    }, []); //điều kiện để gọi lại useEffect
     useEffect(() => {
         // 3
         const btns = document.querySelectorAll(".btn-remove");
         for (let btn of btns) {
             btn.addEventListener("click", function () {
                 const id = this.dataset.id;
+                // Xoa local
                 const newProjects = data.filter((project) => project.id != id);
                 // localStorage.setItem("projects", JSON.stringify(newProjects));
                 setData(newProjects);
+                // xoa server
+                fetch(`http://localhost:3000/projects/${id}`, {
+                    method: "DELETE",
+                }).then(() => alert("Xóa thành công"));
             });
         }
     });
@@ -49,7 +54,7 @@ const ProjectsPage = () => {
                 (project, index) => `
                 <tr>
                     <td>${index + 1}</td>
-                    <td>${project.first_name + project.last_name}</td>
+                    <td>${project.name}</td>
                     <td>
                         <button data-id="${project.id
                     }" class="btn btn-remove btn-danger">Remove</button>
