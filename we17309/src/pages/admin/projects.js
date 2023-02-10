@@ -1,5 +1,6 @@
 // import { projects } from "@/data";
 import { useEffect, useState } from "@/lib";
+
 const ProjectsPage = () => {
     /**
      *
@@ -14,7 +15,7 @@ const ProjectsPage = () => {
     useEffect(() => {
         fetch("http://localhost:3000/projects")
             .then((response) => response.json())
-            .then(data => setData(data));
+            .then((data) => setData(data));
         // lam viec voi localStorage
         // const projects = JSON.parse(localStorage.getItem("projects")) || [];
         // setData(projects);
@@ -39,7 +40,7 @@ const ProjectsPage = () => {
     // 2
     return `<div>
         <h1>Quản lý dự án</h1>
-       
+      
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -49,7 +50,7 @@ const ProjectsPage = () => {
                 </tr>
             </thead>
         <tbody>
-            ${data
+              ${data
             .map(
                 (project, index) => `
                 <tr>
@@ -58,8 +59,7 @@ const ProjectsPage = () => {
                     <td>
                         <button data-id="${project.id
                     }" class="btn btn-remove btn-danger">Remove</button>
-                        
-                        <a href="/admin/projects/${project.id}/edit" class="btn btn-primary ">Sửa</a>
+                        <a href="/admin/projects/${project.id}/edit" class="btn btn-primary">Sửa</a>
                     </td>
                 </tr>
             `

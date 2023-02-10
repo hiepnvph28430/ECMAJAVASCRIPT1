@@ -14,7 +14,7 @@ const app = document.querySelector("#app");
 
 router.on("/", () => render(HomePage, app));
 router.on("projects", () => render(Projects, app));
-router.on("/project/:id", ({ data }) => render(ProjectDetailPage(data), app));
+router.on("/project/:id", ({ data }) => render(() => ProjectDetailPage(data), app));
 router.on("contact", () => render(Contact, app));
 router.on("posts", () => render(Post, app))
 router.on("/admin/projects", () => render(AdminProjectPage, app))
